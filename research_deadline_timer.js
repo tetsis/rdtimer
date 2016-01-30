@@ -1,3 +1,10 @@
+var flagShuAbst = 0;
+var flagShuPaper = 0;
+var flagShuPresen = 0;
+var flagSotsuAbst = 0;
+var flagSotsuPaper = 0;
+var flagSotsuPresen = 0;
+
 window.addEventListener('load',
     function (event) {
         setInterval('display()', 100);
@@ -6,21 +13,21 @@ window.addEventListener('load',
 
 function display() {
     //shu_abst
-    displayTimeAtElement('2016-02-04T16:00:00.000', 'shu_abst');
+    flagShuAbst = displayTimeAtElement('2016-02-04T16:00:00.000', 'shu_abst', flagShuAbst);
     //shu_paper();
-    displayTimeAtElement('2016-02-09T15:00:00.000', 'shu_paper');
+    flagShuPaper = displayTimeAtElement('2016-02-09T15:00:00.000', 'shu_paper', flagShuPaper);
     //shu_presen();
-    displayTimeAtElement('2016-02-12T13:00:00.000', 'shu_presen');
+    flagShuPresen = displayTimeAtElement('2016-02-12T13:00:00.000', 'shu_presen', flagShuPresen);
     //sotsu_abst
-    displayTimeAtElement('2016-02-15T17:00:00.000', 'sotsu_abst');
+    flagSotsuAbst = displayTimeAtElement('2016-02-15T17:00:00.000', 'sotsu_abst', flagSotsuAbst);
     //sotsu_paper();
-    displayTimeAtElement('2016-02-18T15:00:00.000', 'sotsu_paper');
+    flagSotsuPaper = displayTimeAtElement('2016-02-18T15:00:00.000', 'sotsu_paper', flagSotsuPaper);
     //sotsu_presen();
-    displayTimeAtElement('2016-02-23T11:10:00.000', 'sotsu_presen');
+    flagSotsuPresen = displayTimeAtElement('2016-02-23T11:10:00.000', 'sotsu_presen', flagSotsuPresen);
     //now
     displayCurrentTime();
 }
-function displayTimeAtElement(deadlineStr, element) {
+function displayTimeAtElement(deadlineStr, element, flag) {
     var text = document.getElementById(element);
 
     var SECOND_MILLISECOND = 1000;
@@ -39,21 +46,35 @@ function displayTimeAtElement(deadlineStr, element) {
     }
     else {
         var date = Math.floor(lap/DAY_MILLISECOND);
-        date = ('0' + date).slice(-2);
+        var strDate = ('0' + date).slice(-2);
         lap -= date * DAY_MILLISECOND;
         var hour = Math.floor(lap/HOUR_MILLISECOND);
-        hour = ('0' + hour).slice(-2);
+        var strHour = ('0' + hour).slice(-2);
         lap -= hour * HOUR_MILLISECOND;
         var minute = Math.floor(lap/MINUTE_MILLISECOND);
-        minute = ('0' + minute).slice(-2);
+        var strMinute = ('0' + minute).slice(-2);
         lap -= minute * MINUTE_MILLISECOND;
         var second = Math.floor(lap/SECOND_MILLISECOND);
-        second = ('0' + second).slice(-2);
-        text.innerHTML = 'あと ' + date + ' 日 ' + hour + ' 時間 ' + minute + ' 分 ' + second + ' 秒';
+        var strSecond = ('0' + second).slice(-2);
+
+        var tempText = 'あと ' + strDate + ' 日 ' + strHour + ' 時間 ' + strMinute + ' 分 ' + strSecond + ' 秒';
+
+        if (date <= 0) {
+            if (flag == 0) {
+                tempText = '　';
+                flag = 5;
+            }
+            flag = flag - 1;
+        }
+
+        text.innerHTML = tempText;
+
         if (date <= 3) {
             text.style.color = 'red';
         }
     }
+
+    return flag;
 }
 function displayCurrentTime() {
     var now = new Date();
