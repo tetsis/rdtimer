@@ -60,11 +60,21 @@ function displayTimeAtElement(deadlineStr, element, flag) {
         var tempText = 'あと ' + strDate + ' 日 ' + strHour + ' 時間 ' + strMinute + ' 分 ' + strSecond + ' 秒';
 
         if (date <= 0) {
-            if (flag == 0) {
+            if (flag <= 0) {
                 tempText = '　';
-                flag = 5;
+                if (hour <= 0) {
+                    if (minute <= 0) {
+                        flag = 2;
+                    }
+                    else {
+                        flag = 4;
+                    }
+                }
+                else {
+                    flag = 8;
+                }
             }
-            flag = flag - 1;
+            flag--;
         }
 
         text.innerHTML = tempText;
