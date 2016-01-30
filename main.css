@@ -1,0 +1,31 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+}
+
+table {
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin: 30px 0px 30px;
+    border-bottom: solid;
+}
+
+h3 {
+    margin: 20px 10px 30px;
+}
+
+.research_deadline_timer {
+    margin: 0px 20px 0px;
+    font-size: 40px;
+}
+
+#now {
+    text-align: center;
+}
