@@ -10,7 +10,7 @@ function display() {
     //shu_paper();
     displayTimeAtElement('2016-02-09T15:00:00.000', 'shu_paper');
     //shu_presen();
-    displayTimeAtElement('2016-02-12T10:00:00.000', 'shu_presen');
+    displayTimeAtElement('2016-02-12T13:00:00.000', 'shu_presen');
     //sotsu_abst
     displayTimeAtElement('2016-02-15T17:00:00.000', 'sotsu_abst');
     //sotsu_paper();
