@@ -89,7 +89,8 @@ function displayTimeAtElement(deadlineStr, element, flag) {
 function displayCurrentTime() {
     var now = new Date();
     var year = ('0' + now.getFullYear()).slice(-4);
-    var month = ('0' + now.getMonth()+1).slice(-2);
+    var month = now.getMonth()+1;
+    month = ('0' + month).slice(-2);
     var date = ('0' + now.getDate()).slice(-2);
     var hour = ('0' + now.getHours()).slice(-2);
     var minute = ('0' + now.getMinutes()).slice(-2);
