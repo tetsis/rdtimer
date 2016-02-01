@@ -79,7 +79,7 @@ function displayTimeAtElement(deadlineStr, element, flag) {
 
         text.innerHTML = tempText;
 
-        if (date <= 3) {
+        if (date < 3) {
             text.style.color = 'red';
         }
     }
