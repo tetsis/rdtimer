@@ -7,7 +7,7 @@ var flagSotsuPresen = 0;
 
 window.addEventListener('load',
     function (event) {
-        setInterval('display()', 100);
+        setInterval(display, 100);
     }
 , false);
 
