@@ -1,9 +1,17 @@
-var flagShuAbst = 0;
-var flagShuPaper = 0;
-var flagShuPresen = 0;
-var flagSotsuAbst = 0;
-var flagSotsuPaper = 0;
-var flagSotsuPresen = 0;
+var timeShuAbst = '2016-02-04T16:00:00.000';
+var timeShuPaper = '2016-02-09T15:00:00.000';
+var timeShuPresen = '2016-02-12T13:00:00.000';
+var timeSotsuAbst = '2016-02-15T17:00:00.000';
+var timeSotsuPaper = '2016-02-18T15:00:00.000';
+var timeSotsuPresen = '2016-02-23T11:10:00.000';
+
+var counterShuAbst = 0;
+var counterShuPaper = 0;
+var counterShuPresen = 0;
+var counterSotsuAbst = 0;
+var counterSotsuPaper = 0;
+var counterSotsuPresen = 0;
+
 
 window.addEventListener('load',
     function (event) {
@@ -13,21 +21,41 @@ window.addEventListener('load',
 
 function display() {
     //shu_abst
-    flagShuAbst = displayTimeAtElement('2016-02-04T16:00:00.000', 'shu_abst', flagShuAbst);
-    //shu_paper();
-    flagShuPaper = displayTimeAtElement('2016-02-09T15:00:00.000', 'shu_paper', flagShuPaper);
-    //shu_presen();
-    flagShuPresen = displayTimeAtElement('2016-02-12T13:00:00.000', 'shu_presen', flagShuPresen);
+    counterShuAbst = displayTimeAtElement(timeShuAbst, 'shu_abst', counterShuAbst);
+    //shu_paper
+    counterShuPaper = displayTimeAtElement(timeShuPaper, 'shu_paper', counterShuPaper);
+    //shu_presen
+    counterShuPresen = displayTimeAtElement(timeShuPresen, 'shu_presen', counterShuPresen);
     //sotsu_abst
-    flagSotsuAbst = displayTimeAtElement('2016-02-15T17:00:00.000', 'sotsu_abst', flagSotsuAbst);
-    //sotsu_paper();
-    flagSotsuPaper = displayTimeAtElement('2016-02-18T15:00:00.000', 'sotsu_paper', flagSotsuPaper);
-    //sotsu_presen();
-    flagSotsuPresen = displayTimeAtElement('2016-02-23T11:10:00.000', 'sotsu_presen', flagSotsuPresen);
+    counterSotsuAbst = displayTimeAtElement(timeSotsuAbst, 'sotsu_abst', counterSotsuAbst);
+    //sotsu_paper
+    counterSotsuPaper = displayTimeAtElement(timeSotsuPaper, 'sotsu_paper', counterSotsuPaper);
+    //sotsu_presen
+    counterSotsuPresen = displayTimeAtElement(timeSotsuPresen, 'sotsu_presen', counterSotsuPresen);
     //now
     displayCurrentTime();
+
+    //check whether all time over
+    var flagTimeOver = 0;
+    //shu_abst
+    flagTimeOver += isTimerOver(timeShuAbst);
+    //shu_paper
+    flagTimeOver += isTimerOver(timeShuPaper);
+    //shu_presen
+    flagTimeOver += isTimerOver(timeShuPresen);
+    //sotsu_abst
+    flagTimeOver += isTimerOver(timeSotsuAbst);
+    //sotsu_paper
+    flagTimeOver += isTimerOver(timeSotsuPaper);
+    //sotsu_presen
+    flagTimeOver += isTimerOver(timeSotsuPresen);
+
+    if (flagTimeOver == 6) {
+        document.getElementById('table').style.display = 'none';
+        document.getElementById('owata').style.display = 'block';
+    }
 }
-function displayTimeAtElement(deadlineStr, element, flag) {
+function displayTimeAtElement(deadlineStr, element, counter) {
     var text = document.getElementById(element);
 
     var SECOND_MILLISECOND = 1000;
@@ -57,34 +85,38 @@ function displayTimeAtElement(deadlineStr, element, flag) {
         var second = Math.floor(lap/SECOND_MILLISECOND);
         var strSecond = ('0' + second).slice(-2);
 
-        var tempText = 'あと ' + strDate + ' 日 ' + strHour + ' 時間 ' + strMinute + ' 分 ' + strSecond + ' 秒';
-
-        if (date <= 0) {
-            if (flag <= 0) {
-                tempText = '　';
-                if (hour <= 0) {
-                    if (minute <= 0) {
-                        flag = 2;
-                    }
-                    else {
-                        flag = 4;
-                    }
-                }
-                else {
-                    flag = 8;
-                }
-            }
-            flag--;
-        }
-
-        text.innerHTML = tempText;
-
         if (date < 3) {
             text.style.color = 'red';
         }
+        else {
+        text.style.color = 'white';
+        }
+        var strText = 'あと ' + strDate + ' 日 ' + strHour + ' 時間 ' + strMinute + ' 分 ' + strSecond + ' 秒';
+
+        //flash
+        if (date <= 0) {
+            if (counter <= 0) {
+                text.style.color = 'black';
+                if (hour <= 0) {
+                    if (minute <= 0) {
+                        counter = 2;
+                    }
+                    else {
+                        counter = 4;
+                    }
+                }
+                else {
+                    counter = 8;
+                }
+            }
+            counter--;
+        }
+
+        text.innerHTML = strText;
+
     }
 
-    return flag;
+    return counter;
 }
 function displayCurrentTime() {
     var now = new Date();
@@ -97,4 +129,16 @@ function displayCurrentTime() {
     var second = ('0' + now.getSeconds()).slice(-2);
     var text = document.getElementById('now');
     text.innerHTML ='現在時刻：' + year + ' 年 ' + month + ' 月 ' + date + ' 日 ' + hour + ' 時 ' + minute + ' 分 ' + second + ' 秒';
+}
+
+function isTimerOver(deadlineStr) {
+    var now = new Date();
+    var deadline = new Date(deadlineStr);
+    var lap = deadline.getTime() - now.getTime();
+
+    if (lap < 0) {
+        return 1;
+    }
+
+    return 0;
 }

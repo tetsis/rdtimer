@@ -27,6 +27,12 @@ h3 {
     font-size: 40px;
 }
 
+#owata {
+    text-align: center;
+    font-size: 150px;
+    display: none;
+}
+
 #now {
     text-align: center;
 }
