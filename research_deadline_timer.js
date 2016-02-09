@@ -85,20 +85,20 @@ function displayTimeAtElement(deadlineStr, element, counter) {
         var second = Math.floor(lap/SECOND_MILLISECOND);
         var strSecond = ('0' + second).slice(-2);
 
+        //change color
         if (date < 3) {
             text.style.color = 'red';
         }
         else {
-        text.style.color = 'white';
+            text.style.color = 'white';
         }
-        var strText = 'あと ' + strDate + ' 日 ' + strHour + ' 時間 ' + strMinute + ' 分 ' + strSecond + ' 秒';
 
         //flash
         if (date <= 0) {
             if (counter <= 0) {
                 text.style.color = 'black';
-                if (hour <= 0) {
-                    if (minute <= 0) {
+                if (hour <= 11) {
+                    if (hour <= 2) {
                         counter = 2;
                     }
                     else {
@@ -112,7 +112,7 @@ function displayTimeAtElement(deadlineStr, element, counter) {
             counter--;
         }
 
-        text.innerHTML = strText;
+        text.innerHTML = 'あと ' + strDate + ' 日 ' + strHour + ' 時間 ' + strMinute + ' 分 ' + strSecond + ' 秒';
 
     }
 
