@@ -12,14 +12,15 @@
 
 <?php
 $fp = fopen("admin/date.dat", "r");
-while (!feof($fp)) {
-    $str = fgetcsv($fp);
-    foreach($str as $value) {
-        print "$value,";
-    }
+if ($fp) {
+    $shuAbst = fgetcsv($fp);
+    $shuPaper = fgetcsv($fp);
+    $shuPresen = fgetcsv($fp);
+    $sotsuAbst = fgetcsv($fp);
+    $sotsuPaper = fgetcsv($fp);
+    $sotsuPresen = fgetcsv($fp);
 }
-print "aaa";
-phpinfo();
+fclose($fp);
 ?>
 
 <h1>研究締め切りタイマー</h1>
@@ -43,12 +44,26 @@ phpinfo();
         <td>
             <div id="shu_abst" class="research_deadline_timer">
             </div>
-            <h3>提出期限：2016年2月4日 16時</h3>
+            <h3>
+            <?php
+            print "提出期限：{$shuAbst[0]}年{$shuAbst[1]}月{$shuAbst[2]}日 {$shuAbst[3]}時";
+            if ($shuAbst[4]) {
+                print "{$shuAbst[4]}分";
+            }
+            ?>
+            </h3>
         </td>
         <td>
             <div id="sotsu_abst" class="research_deadline_timer">
             </div>
-            <h3>提出期限：2016年2月15日 17時</h3>
+            <h3>
+            <?php
+            print "提出期限：{$sotsuAbst[0]}年{$sotsuAbst[1]}月{$sotsuAbst[2]}日 {$sotsuAbst[3]}時";
+            if ($sotsuAbst[4]) {
+                print "{$sotsuAbst[4]}分";
+            }
+            ?>
+            </h3>
         </td>
     </tr>
     <tr>
@@ -58,12 +73,26 @@ phpinfo();
         <td>
             <div id="shu_paper" class="research_deadline_timer">
             </div>
-            <h3>提出期限：2016年2月9日 15時</h3>
+            <h3>
+            <?php
+            print "提出期限：{$shuPaper[0]}年{$shuPaper[1]}月{$shuPaper[2]}日 {$shuPaper[3]}時";
+            if ($shuPaper[4]) {
+                print "{$shuPaper[4]}分";
+            }
+            ?>
+            </h3>
         </td>
         <td>
             <div id="sotsu_paper" class="research_deadline_timer">
             </div>
-            <h3>提出期限：2016年2月18日 15時</h3>
+            <h3>
+            <?php
+            print "提出期限：{$sotsuPaper[0]}年{$sotsuPaper[1]}月{$sotsuPaper[2]}日 {$sotsuPaper[3]}時";
+            if ($sotsuPaper[4]) {
+                print "{$sotsuPaper[4]}分";
+            }
+            ?>
+            </h3>
         </td>
     </td>
     <tr>
@@ -73,12 +102,34 @@ phpinfo();
         <td>
             <div id="shu_presen" class="research_deadline_timer">
             </div>
-            <h3>発表時間：2016年2月12日 13時～13時30分</h3>
+            <h3>
+            <?php
+            print "発表時間：{$shuPresen[0]}年{$shuPresen[1]}月{$shuPresen[2]}日 {$shuPresen[3]}時";
+            if ($shuPresen[4]) {
+                print "{$shuPresen[4]}分";
+            }
+            print "～{$shuPresen[5]}時";
+            if ($shuPresen[6]) {
+                print "{$shuPresen[6]}分";
+            }
+            ?>
+            </h3>
         </td>
         <td>
             <div id="sotsu_presen" class="research_deadline_timer">
             </div>
-            <h3>発表時間：2016年2月23日 11時10分～12時</h3>
+            <h3>
+            <?php
+            print "発表時間：{$sotsuPresen[0]}年{$sotsuPresen[1]}月{$sotsuPresen[2]}日 {$sotsuPresen[3]}時";
+            if ($sotsuPresen[4]) {
+                print "{$sotsuPresen[4]}分";
+            }
+            print "～{$sotsuPresen[5]}時";
+            if ($sotsuPresen[6]) {
+                print "{$sotsuPresen[6]}分";
+            }
+            ?>
+            </h3>
         </td>
     </tr>
     </table>
