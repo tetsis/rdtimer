@@ -17,14 +17,18 @@ var counterSotsuPresen = 0;
 //ロード関数
 window.addEventListener('load',
     function (event) {
-        timeShuAbstStr = createTimeString(timeShuAbst[0], timeShuAbst[1], timeShuAbst[2], timeShuAbst[3], timeShuAbst[4]);
-        timeShuPaperStr = createTimeString(timeShuPaper[0], timeShuPaper[1], timeShuPaper[2], timeShuPaper[3], timeShuPaper[4]);
-        timeShuPresenStartStr = createTimeString(timeShuPresen[0], timeShuPresen[1], timeShuPresen[2], timeShuPresen[3], timeShuPresen[4])
-        timeShuPresenStartStr = createTimeString(timeShuPresen[0], timeShuPresen[1], timeShuPresen[2], timeShuPresen[5], timeShuPresen[6])
-        timeSotsuAbstStr = createTimeString(timeSotsuAbst[0], timeSotsuAbst[1], timeSotsuAbst[2], timeSotsuAbst[3], timeSotsuAbst[4]);
-        timeSotsuPaperStr = createTimeString(timeSotsuPaper[0], timeSotsuPaper[1], timeSotsuPaper[2], timeSotsuPaper[3], timeSotsuPaper[4]);
-        timeSotsuPresenStartStr = createTimeString(timeSotsuPresen[0], timeSotsuPresen[1], timeSotsuPresen[2], timeSotsuPresen[3], timeSotsuPresen[4])
-        timeSotsuPresenStartStr = createTimeString(timeSotsuPresen[0], timeSotsuPresen[1], timeSotsuPresen[2], timeSotsuPresen[5], timeSotsuPresen[6])
+
+        //PHPから受け取った時間変数から文字列を生成
+        timeShuAbstStr = createTimeString(timeShuAbst);
+        timeShuPaperStr = createTimeString(timeShuPaper);
+        timeShuPresenStartStr = createTimeString(timeShuPresenStart);
+        timeShuPresenStartStr = createTimeString(timeShuPresenEnd);
+        timeSotsuAbstStr = createTimeString(timeSotsuAbst);
+        timeSotsuPaperStr = createTimeString(timeSotsuPaper);
+        timeSotsuPresenStartStr = createTimeString(timeSotsuPresenStart);
+        timeSotsuPresenStartStr = createTimeString(timeSotsuPresenEnd);
+
+        //一定時間ごとに画面表示を実行
         setInterval(display, 100);
     }
 , false);
@@ -44,6 +48,14 @@ function display() {
     counterSotsuPaper = displayTimeOfAbstAndPaper(timeSotsuPaperStr, 'sotsu_paper', counterSotsuPaper);
     //sotsu_presen
     counterSotsuPresen = displayTimeOfPresen(timeSotsuPresenStartStr, timeSotsuPresenEndStr, 'sotsu_presen', counterSotsuPresen);
+
+    //締切表示
+    displayDateOfAbstAndPaper(timeShuAbst, 'shu_abst_date');
+    displayDateOfAbstAndPaper(timeShuPaper, 'shu_paper_date');
+    displayDateOfPresen(timeShuPresenStart, timeShuPresenEnd, 'shu_presen_date');
+    displayDateOfAbstAndPaper(timeSotsuAbst, 'sotsu_abst_date');
+    displayDateOfAbstAndPaper(timeSotsuPaper, 'sotsu_paper_date');
+    displayDateOfPresen(timeSotsuPresenStart, timeSotsuPresenEnd, 'sotsu_presen_date');
 
     //オワタ表示
     var flagTimeOver = 0;
@@ -109,6 +121,48 @@ function displayTimeOfPresen(startTimeStr, endTimeStr, element, counter) {
     }
 
     return counter;
+}
+
+//アブスト欄と論文欄の締切を表示する関数
+function displayDateOfAbstAndPaper(timeStr, element) {
+    var text = document.getElementById(element);
+
+    text.innerHTML = '提出期限：' + timeStr[0] + '年' + timeStr[1] + '月' + timeStr[2] + '日 ' + timeStr[3] + '時';
+
+    if (timeStr[4] != '0') {
+        text.innerHTML += timeStr[4] + '分';
+    }
+}
+
+//発表欄の締切を表示する関数
+function displayDateOfPresen(startTimeStr, endTimeStr,element) {
+    var text = document.getElementById(element);
+
+    text.innerHTML = '発表時間：' + startTimeStr[0] + '年' + startTimeStr[1] + '月' + startTimeStr[2] + '日 ' + startTimeStr[3] + '時';
+    if (startTimeStr[4] != '0') {
+        text.innerHTML += startTimeStr[4] + '分';
+    }
+
+    text.innerHTML += '～' + endTimeStr[3] + '時';
+    if (endTimeStr[4] != '0') {
+        text.innerHTML += endTimeStr[4] + '分';
+    }
+}
+
+//現在時刻を表示する関数
+function displayCurrentTime() {
+    var now = new Date();
+    var year = ('0' + now.getFullYear()).slice(-4);
+    var month = now.getMonth()+1;
+    month = ('0' + month).slice(-2);
+    var day = ('0' + now.getDate()).slice(-2);
+    var hour = ('0' + now.getHours()).slice(-2);
+    var minute = ('0' + now.getMinutes()).slice(-2);
+    var second = ('0' + now.getSeconds()).slice(-2);
+
+    var text = document.getElementById('now');
+
+    text.innerHTML ='現在時刻：' + year + ' 年 ' + month + ' 月 ' + day + ' 日 ' + hour + ' 時 ' + minute + ' 分 ' + second + ' 秒';
 }
 
 //残り時間を表示する関数（返り値 カウンターの値）
@@ -180,22 +234,6 @@ function displayClose(element) {
     text.innerHTML = '-- 終了 --';
 }
 
-//現在時刻を表示する関数
-function displayCurrentTime() {
-    var now = new Date();
-    var year = ('0' + now.getFullYear()).slice(-4);
-    var month = now.getMonth()+1;
-    month = ('0' + month).slice(-2);
-    var day = ('0' + now.getDate()).slice(-2);
-    var hour = ('0' + now.getHours()).slice(-2);
-    var minute = ('0' + now.getMinutes()).slice(-2);
-    var second = ('0' + now.getSeconds()).slice(-2);
-
-    var text = document.getElementById('now');
-
-    text.innerHTML ='現在時刻：' + year + ' 年 ' + month + ' 月 ' + day + ' 日 ' + hour + ' 時 ' + minute + ' 分 ' + second + ' 秒';
-}
-
 //タイマーの終了を判断する関数（返り値 0：終了していない、1：終了）
 function isTimerOver(timeStr) {
     var now = new Date();
@@ -210,12 +248,12 @@ function isTimerOver(timeStr) {
 }
 
 //PHPから送られてきた時間変数からJavaScript用時間文字列を生成する関数（返り値 文字列）
-function createTimeString(year, month, day, hour, minute) {
-    year = ('0' + year).slice(-4);
-    month = ('0' + month).slice(-2);
-    day = ('0' + day).slice(-2);
-    hour = ('0' + hour).slice(-2);
-    minute = ('0' + minute).slice(-2);
+function createTimeString(time) {
+    year = ('0' + time[0]).slice(-4);
+    month = ('0' + time[1]).slice(-2);
+    day = ('0' + time[2]).slice(-2);
+    hour = ('0' + time[3]).slice(-2);
+    minute = ('0' + time[4]).slice(-2);
     timeStr = year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':00.000';
 
     return timeStr;
