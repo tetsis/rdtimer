@@ -69,12 +69,14 @@ function displayTimeOfAbstAndPaper(timeStr, element, counter) {
 
     if (lap > 0) {
         //残り時間を表示
-        displayTime(lap, element, counter);
+        counter = displayTime(lap, element, counter);
     }
     else {
         //「終了」を表示
         displayClose(element);
     }
+
+    return counter;
 }
 
 //発表欄を表示する関数
@@ -87,7 +89,7 @@ function displayTimeOfPresen(startTimeStr, endTimeStr, element, counter) {
 
     if (startLap > 0) {
         //残り時間を表示
-        displayTime(startLap, element, counter);
+        counter = displayTime(startLap, element, counter);
     }
     else if (endLap > 0) {
         //「発表中」を表示
@@ -97,6 +99,8 @@ function displayTimeOfPresen(startTimeStr, endTimeStr, element, counter) {
         //「終了」を表示
         displayClose(element);
     }
+
+    return counter;
 }
 
 //残り時間を表示する関数（返り値 カウンターの値）
