@@ -44,7 +44,9 @@ $jsonSotsuPresenEnd = json_encode($timeSotsuPresenEnd);
     var timeSotsuPresenStart = <?php echo $jsonSotsuPresenStart; ?>;
     var timeSotsuPresenEnd = <?php echo $jsonSotsuPresenEnd; ?>;
 </script>
-
+<div id="link">
+<a href = "admin/index.php">管理者画面へ</a>
+</div>
 <h1>研究締め切りタイマー</h1>
 <br/>
 <table id="main">

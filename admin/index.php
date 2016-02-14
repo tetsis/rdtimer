@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<div id="link">
+<a href = "../index.php">元の画面へ</a>
+</div>
 <h1>研究締め切りタイマー　管理者画面</h1>
 
 <form method = 'post' name = 'form' onSubmit = 'return checkInput()'>
