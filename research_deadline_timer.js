@@ -1,3 +1,8 @@
+var SECOND_MILLISECOND = 1000;
+var MINUTE_MILLISECOND = 60 * SECOND_MILLISECOND;
+var HOUR_MILLISECOND = 60 * MINUTE_MILLISECOND;
+var DAY_MILLISECOND = 24 * HOUR_MILLISECOND;
+
 var timeShuAbstStr;
 var timeShuPaperStr;
 var timeShuPresenStartStr;
@@ -15,6 +20,7 @@ var counterSotsuPaper = 0;
 var counterSotsuPresen = 0;
 
 var counterGanbare = 0;
+var counterOppai = 0;
 
 //ロード関数
 window.addEventListener('load',
@@ -59,31 +65,52 @@ function display() {
     displayDateOfAbstAndPaper(timeSotsuPaper, 'sotsu_paper_date');
     displayDateOfPresen(timeSotsuPresenStart, timeSotsuPresenEnd, 'sotsu_presen_date');
 
-    //オワタ表示
-    var flagTimeOver = 0;
-    //shu_abst
-    flagTimeOver += isTimerOver(timeShuAbstStr);
-    //shu_paper
-    flagTimeOver += isTimerOver(timeShuPaperStr);
-    //shu_presen
-    flagTimeOver += isTimerOver(timeShuPresenEndStr);
-    //sotsu_abst
-    flagTimeOver += isTimerOver(timeSotsuAbstStr);
-    //sotsu_paper
-    flagTimeOver += isTimerOver(timeSotsuPaperStr);
-    //sotsu_presen
-    flagTimeOver += isTimerOver(timeSotsuPresenEndStr);
+    //がんばれとがんばれ（おっぱいver）表示の初期化
+    displayGanbare(false);
+    displayOppai(false);
 
+    //すべてが終わったらオワタ表示
+    var flagTimeOver = 0;
+    flagTimeOver += isTimerOver(timeShuAbstStr);
+    flagTimeOver += isTimerOver(timeShuPaperStr);
+    flagTimeOver += isTimerOver(timeShuPresenEndStr);
+    flagTimeOver += isTimerOver(timeSotsuAbstStr);
+    flagTimeOver += isTimerOver(timeSotsuPaperStr);
+    flagTimeOver += isTimerOver(timeSotsuPresenEndStr);
     if (flagTimeOver == 6) {
         document.getElementById('table').style.display = 'none';
         document.getElementById('owata').style.display = 'block';
+    }
+    else {
+        //1日未満のタイマーがあればがんばれ（おっぱいver）表示
+        var flagOppai = 0;
+        flagOppai += isOppai(timeShuAbstStr);
+        flagOppai += isOppai(timeShuPaperStr);
+        flagOppai += isOppai(timeShuPresenEndStr);
+        flagOppai += isOppai(timeSotsuAbstStr);
+        flagOppai += isOppai(timeSotsuPaperStr);
+        flagOppai += isOppai(timeSotsuPresenEndStr);
+        if (flagOppai > 0) {
+            displayOppai(true);
+        }
+        else {
+            //あと3日～1日のタイマーがあればがんばれ表示
+            var flagGanbare = 0;
+            flagGanbare += isGanbare(timeShuAbstStr);
+            flagGanbare += isGanbare(timeShuPaperStr);
+            flagGanbare += isGanbare(timeShuPresenEndStr);
+            flagGanbare += isGanbare(timeSotsuAbstStr);
+            flagGanbare += isGanbare(timeSotsuPaperStr);
+            flagGanbare += isGanbare(timeSotsuPresenEndStr);
+            if (flagGanbare > 0) {
+                displayGanbare(true);
+            }
+        }
     }
 
     //現在時刻表示
     displayCurrentTime();
 
-    //がんばれ表示
-    displayGanbare();
 }
 
 //アブスト欄と論文欄を表示する関数
@@ -172,11 +199,6 @@ function displayCurrentTime() {
 
 //残り時間を表示する関数（返り値 カウンターの値）
 function displayTime(lap, element, counter) {
-    var SECOND_MILLISECOND = 1000;
-    var MINUTE_MILLISECOND = 60 * SECOND_MILLISECOND;
-    var HOUR_MILLISECOND = 60 * MINUTE_MILLISECOND;
-    var DAY_MILLISECOND = 24 * HOUR_MILLISECOND;
-
     var day = Math.floor(lap/DAY_MILLISECOND);
     var strDay = ('0' + day).slice(-2);
     lap -= day * DAY_MILLISECOND;
@@ -252,6 +274,36 @@ function isTimerOver(timeStr) {
     return 0;
 }
 
+//がんばれの表示を判断する関数（返り値 0：がんばれじゃない、1：がんばれ）
+//残り時間が3日～1日の間にあれば1を返す
+function isGanbare(timeStr) {
+    var now = new Date();
+    var time = new Date(timeStr);
+    var lap = time.getTime() - now.getTime();
+    var day = Math.floor(lap/DAY_MILLISECOND);
+
+    if (day < 3 && day > 0) {
+        return 1;
+    }
+
+    return 0;
+}
+
+//がんばれ（おっぱいver）の表示を判断する関数（返り値 0：がんばれじゃない、1：がんばれ）
+//残り時間が1日未満になれば1を返す
+function isOppai(timeStr) {
+    var now = new Date();
+    var time = new Date(timeStr);
+    var lap = time.getTime() - now.getTime();
+    var day = Math.floor(lap/DAY_MILLISECOND);
+
+    if (day == 0) {
+        return 1;
+    }
+
+    return 0;
+}
+
 //PHPから送られてきた時間変数からJavaScript用時間文字列を生成する関数（返り値 文字列）
 function createTimeString(time) {
     year = ('0' + time[0]).slice(-4);
@@ -265,30 +317,63 @@ function createTimeString(time) {
 }
 
 //がんばれを表示する関数
-function displayGanbare() {
-    var ganbare1 = document.getElementById('ganbare1');
-    var ganbare2 = document.getElementById('ganbare2');
-    var ganbare3 = document.getElementById('ganbare3');
-    var ganbare4 = document.getElementById('ganbare4');
-    ganbare1.style.display = 'none';
-    ganbare2.style.display = 'none';
-    ganbare3.style.display = 'none';
-    ganbare4.style.display = 'none';
-    if (counterGanbare <= 8) {
-        ganbare1.style.display = 'block';
+function displayGanbare(flag) {
+    var ganbare = document.getElementById('ganbare');
+    if (flag == false) {
+        ganbare.style.display = 'none';
     }
-    else if (counterGanbare <= 16) {
-        ganbare2.style.display = 'block';
-    }
-    else if (counterGanbare <= 24) {
-        ganbare3.style.display = 'block';
-    }
-    else if (counterGanbare <= 34) {
-        ganbare4.style.display = 'block';
-        if (counterGanbare == 34){
-            counterGanbare = 0;
+    else {
+        var ganbare1 = document.getElementById('ganbare1');
+        var ganbare2 = document.getElementById('ganbare2');
+        var ganbare3 = document.getElementById('ganbare3');
+        var ganbare4 = document.getElementById('ganbare4');
+        ganbare.style.display = 'block';
+        ganbare1.style.display = 'none';
+        ganbare2.style.display = 'none';
+        ganbare3.style.display = 'none';
+        ganbare4.style.display = 'none';
+        if (counterGanbare <= 8) {
+            ganbare1.style.display = 'block';
         }
-    }
+        else if (counterGanbare <= 16) {
+            ganbare2.style.display = 'block';
+        }
+        else if (counterGanbare <= 24) {
+            ganbare3.style.display = 'block';
+        }
+        else if (counterGanbare <= 34) {
+            ganbare4.style.display = 'block';
+            if (counterGanbare == 34){
+                counterGanbare = 0;
+            }
+        }
 
-    counterGanbare++;
+        counterGanbare++;
+    }
+}
+
+//がんばれ（おっぱいver）を表示する関数
+function displayOppai(flag) {
+    var oppai = document.getElementById('oppai');
+    if (flag == false) {
+        oppai.style.display = 'none';
+    }
+    else {
+        var oppai1 = document.getElementById('oppai1');
+        var oppai2 = document.getElementById('oppai2');
+        oppai.style.display = 'block';
+        oppai1.style.display = 'none';
+        oppai2.style.display = 'none';
+        if (counterOppai <= 4) {
+            oppai1.style.display = 'block';
+        }
+        else if (counterOppai <= 8) {
+            oppai2.style.display = 'block';
+            if (counterOppai == 8){
+                counterOppai = 0;
+            }
+        }
+
+        counterOppai++;
+    }
 }

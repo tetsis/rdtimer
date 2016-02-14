@@ -23,7 +23,7 @@ fclose($fp);
 ?>
 
 <form method = 'post'>
-<table>
+<table id='main'>
 <tr>
     <td>
     </td>
@@ -40,6 +40,7 @@ fclose($fp);
     </td>
     <td>
         <div>
+        提出期限：
         <select name='shu_abst_year'>
         <?php
             for ($i = 2015; $i <= 2030; $i++) {

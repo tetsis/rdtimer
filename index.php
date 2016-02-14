@@ -102,43 +102,65 @@ $jsonSotsuPresenEnd = json_encode($timeSotsuPresenEnd);
 ｵﾜﾀ ＼(^o^)／
 </div>
 <br/>
+
 <div id="now"></div>
-<table id="ganbare">
+
+<div id="ganbare">
+<table>
 <tr>
 <td>
 <div id="ganbare1" class="aa">
-　　♪　ﾁｬｯﾁｬｯﾁｬｯ　♪<br>
-　　　　　　　∧＿∧<br>
-　　　　　　 （･∀･　）<br>
-　　　((( ;;"~;;;"~゛;;）<br>
-　　　　. ﾐ;,,_,ﾐ;,,_,,;ﾐ<br>
+　♪　ﾁｬｯﾁｬｯﾁｬｯ　♪<br>
+　　　　　　∧＿∧<br>
+　　　　　 （･∀･　）<br>
+　　((( ;;"~;;;"~゛;;）<br>
+　　　. ﾐ;,,_,ﾐ;,,_,,;ﾐ<br>
 </div>
 <div id="ganbare2" class="aa">
-　　　　♪　ﾁｬｯﾁｬｯﾁｬｯ　♪<br>
-　 　　　　 ∧＿∧<br>
-　　　　　 （　･∀･）<br>
-　　　　　（;;"~゛;;;~゛;; )))<br>
-　　　　　. ﾐ;,,_,,;ﾐ,_,,;ﾐ<br>
+　　　♪　ﾁｬｯﾁｬｯﾁｬｯ　♪<br>
+ 　　　　 ∧＿∧<br>
+　　　　 （　･∀･）<br>
+　　　　（;;"~゛;;;~゛;; )))<br>
+　　　　. ﾐ;,,_,,;ﾐ,_,,;ﾐ<br>
 </div>
 <div id="ganbare3" class="aa">
-　　　♪　　うーっ　　♪<br>
-　 　　　　 ∧＿∧<br>
-　　　　　 （. ･∀･ ）<br>
-　　　　　 ;;"~゛;;;"~゛;; <br>
-　　　　　 ﾐ;,,_,,;ﾐ,,,_,,;ﾐ<br>
+　　♪　　うーっ　　♪<br>
+ 　　　　 ∧＿∧<br>
+　　　　 （. ･∀･ ）<br>
+　　　　 ;;"~゛;;;"~゛;; <br>
+　　　　 ﾐ;,,_,,;ﾐ,,,_,,;ﾐ<br>
 </div>
 <div id="ganbare4" class="aa">
-　 ♪　　ガンバレ　　♪<br>
-　 ;;"~'ﾞ;; .∧＿∧ ;;"~'ﾞ;;<br>
-　 ﾐ,,,_,,,ﾐ（ ・∀・ ）ﾐ,,,_,,,ﾐ<br>
-　　　　 ＼　　　 ／<br>
-　　　　 　|⌒I、│<br>
-　　　　　（＿） ノ<br>
-　　　　　 　　∪
+ ♪　　ガンバレ　　♪<br>
+ ;;"~'ﾞ;; .∧＿∧ ;;"~'ﾞ;;<br>
+ ﾐ,,,_,,,ﾐ（ ・∀・ ）ﾐ,,,_,,,ﾐ<br>
+　　　 ＼　　　 ／<br>
+　　　 　|⌒I、│<br>
+　　　　（＿） ノ<br>
+　　　　 　　∪
 </div>
 </td>
 </tr>
 </table>
-<br/>
+</div>
+
+<div id="oppai">
+<table>
+<tr>
+<td>
+<div id="oppai1" class="aa">
+　　　　∩<br>
+(　ﾟ∀ﾟ)彡　ガン　<br>
+</div>
+<div id="oppai2" class="aa">
+<br>
+(　ﾟ∀ﾟ)　　バレ！<br>
+⊂彡<br>
+</div>
+</tr>
+</td>
+</table>
+</div>
+
 </body>
 </html>
