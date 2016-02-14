@@ -15,7 +15,7 @@ h2 {
 }
 
 h3 {
-    margin: 6px 0px;
+    margin: 6px 20px;
     font-size: 18px;
     text-align: right;
 }
@@ -43,6 +43,9 @@ table {
 }
 
 #now {
+    text-align: center;
+}
+#update {
     text-align: center;
 }
 

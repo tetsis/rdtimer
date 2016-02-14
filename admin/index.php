@@ -4,10 +4,44 @@
     <meta charset="utf-8">
     <title>管理者画面</title>
     <link rel="stylesheet" type="text/css" href="../main.css">
+    <script type="text/javascript" src="input_checker.js"></script>
 </head>
 <body>
 
+<h1>研究締め切りタイマー　管理画面</h1>
+
+<form method = 'post' name = 'form' onSubmit = 'return checkInput()'>
+
 <?php
+
+if ($_POST['update']) {
+
+    $shuAbstStr = createTimeStringOfAbstAndPaper('shu_abst');
+    $shuPaperStr = createTimeStringOfAbstAndPaper('shu_paper');
+    $shuPresenStartStr = createTimeStringOfPresen('shu_presen', 'start');
+    $shuPresenEndStr = createTimeStringOfPresen('shu_presen', 'end');
+    $sotsuAbstStr = createTimeStringOfAbstAndPaper('sotsu_abst');
+    $sotsuPaperStr = createTimeStringOfAbstAndPaper('sotsu_paper');
+    $sotsuPresenStartStr = createTimeStringOfPresen('sotsu_presen', 'start');
+    $sotsuPresenEndStr = createTimeStringOfPresen('sotsu_presen', 'end');
+    $fp = fopen("deadline.dat", "w");
+    if ($fp) {
+        fputs($fp, $shuAbstStr. "\n");
+        fputs($fp, $shuPaperStr. "\n");
+        fputs($fp, $shuPresenStartStr. "\n");
+        fputs($fp, $shuPresenEndStr. "\n");
+        fputs($fp, $sotsuAbstStr. "\n");
+        fputs($fp, $sotsuPaperStr. "\n");
+        fputs($fp, $sotsuPresenStartStr. "\n");
+        fputs($fp, $sotsuPresenEndStr. "\n");
+        fclose($fp);
+    }
+    else {
+        echo "ファイルの書き込みに失敗しました。";
+        exit(1);
+    }
+}
+
 $fp = fopen("deadline.dat", "r");
 if ($fp) {
     $timeShuAbst = fgetcsv($fp);
@@ -18,11 +52,14 @@ if ($fp) {
     $timeSotsuPaper = fgetcsv($fp);
     $timeSotsuPresenStart = fgetcsv($fp);
     $timeSotsuPresenEnd = fgetcsv($fp);
+    fclose($fp);
 }
-fclose($fp);
+else {
+    echo "ファイルの読み込みに失敗しました。";
+    exit(1);
+}
 ?>
 
-<form method = 'post'>
 <table id='main'>
 <tr>
     <td>
@@ -39,62 +76,18 @@ fclose($fp);
         <h2>アブスト</h2>
     </td>
     <td>
-        <div>
-        提出期限：
-        <select name='shu_abst_year'>
+        <h3>
         <?php
-            for ($i = 2015; $i <= 2030; $i++) {
-                $selected = "";
-                if ($i == $timeShuAbst[0]) $selected = "selected";
-                print "<option value=$i $selected>$i</option>";
-            }
+            displaySettingOfAbstAndPaper($timeShuAbst, 'shu_abst');
         ?>
-        </select>
-        年
-        <select name='shu_abst_month'>
-        <?php
-            for ($i = 1; $i <= 12; $i++) {
-                $selected = "";
-                if ($i == $timeShuAbst[1]) $selected = "selected";
-                print "<option value=$i $selected>$i</option>";
-            }
-        ?>
-        </select>
-        月
-        <select name='shu_abst_day'>
-        <?php
-            for ($i = 1; $i <= 31; $i++) {
-                $selected = "";
-                if ($i == $timeShuAbst[2]) $selected = "selected";
-                print "<option value=$i $selected>$i</option>";
-            }
-        ?>
-        </select>
-        日
-        <select name='shu_abst_hour'>
-        <?php
-            for ($i = 0; $i <= 23; $i++) {
-                $selected = "";
-                if ($i == $timeShuAbst[3]) $selected = "selected";
-                print "<option value=$i $selected>$i</option>";
-            }
-        ?>
-        </select>
-        時
-        <select name='shu_abst_minute'>
-        <?php
-            for ($i = 0; $i <= 59; $i++) {
-                $selected = "";
-                if ($i == $timeShuAbst[4]) $selected = "selected";
-                print "<option value=$i $selected>$i</option>";
-            }
-        ?>
-        </select>
-        分
-        </div>
-        <div id="shu_abst" class="research_deadline_timer"></div>
+        </h3>
     </td>
     <td>
+        <h3>
+        <?php
+            displaySettingOfAbstAndPaper($timeSotsuAbst, 'sotsu_abst');
+        ?>
+        </h3>
     </td>
 </tr>
 <tr>
@@ -102,8 +95,18 @@ fclose($fp);
         <h2>論文</h2>
     </td>
     <td>
+        <h3>
+        <?php
+            displaySettingOfAbstAndPaper($timeShuPaper, 'shu_paper');
+        ?>
+        </h3>
     </td>
     <td>
+        <h3>
+        <?php
+            displaySettingOfAbstAndPaper($timeSotsuPaper, 'sotsu_paper');
+        ?>
+        </h3>
     </td>
 </tr>
 <tr>
@@ -111,16 +114,150 @@ fclose($fp);
         <h2>発表</h2>
     </td>
     <td>
+        <h3>
+        <?php
+            displaySettingOfPresen($timeShuPresenStart, $timeShuPresenEnd, 'shu_presen');
+        ?>
+        </h3>
     </td>
     <td>
+        <h3>
+        <?php
+            displaySettingOfPresen($timeSotsuPresenStart, $timeSotsuPresenEnd, 'sotsu_presen');
+        ?>
+        </h3>
     </td>
 </tr>
 </table>
 <br/>
-<br/>
-<br/>
+<div id='update'>
 <input type = 'submit' name = 'update' value = '更新'/>
+</div>
 
 </form>
 </body>
 </html>
+
+
+<?php
+function displaySettingOfAbstAndPaper($time, $str) {
+    $yearStr = $str. '_year';
+    $monthStr = $str. '_month';
+    $dayStr = $str. '_day';
+    $hourStr = $str. '_hour';
+    $minuteStr = $str. '_minute';
+
+    print "提出期限：";
+    displaySelectOfYear($yearStr, $time[0]);
+    displaySelectOfMonth($monthStr, $time[1]);
+    displaySelectOfDay($dayStr, $time[2]);
+    displaySelectOfHour($hourStr, $time[3]);
+    displaySelectOfMinute($minuteStr, $time[4]);
+}
+
+function displaySettingOfPresen($startTime, $endTime, $str) {
+    $yearStr = $str. '_year';
+    $monthStr = $str. '_month';
+    $dayStr = $str. '_day';
+    $startHourStr = $str. '_start_hour';
+    $startMinuteStr = $str. '_start_minute';
+    $endHourStr = $str. '_end_hour';
+    $endMinuteStr = $str. '_end_minute';
+
+    print "発表時間：";
+    displaySelectOfYear($yearStr, $startTime[0]);
+    displaySelectOfMonth($monthStr, $startTime[1]);
+    displaySelectOfDay($dayStr, $startTime[2]);
+    displaySelectOfHour($startHourStr, $startTime[3]);
+    displaySelectOfMinute($startMinuteStr, $startTime[4]);
+    print "<br/>\n";
+    print "～ ";
+    displaySelectOfHour($endHourStr, $endTime[3]);
+    displaySelectOfMinute($endMinuteStr, $endTime[4]);
+}
+
+function displaySelectOfYear($str, $time) {
+    print "<select name=$str>";
+    for ($i = 2015; $i <= 2030; $i++) {
+        $selected = "";
+        if ($i == $time) $selected = "selected";
+        print "<option value=$i $selected>$i</option>";
+    }
+    print "</select>";
+    print "年 ";
+}
+
+function displaySelectOfMonth($str, $time) {
+    print "<select name=$str>";
+    for ($i = 1; $i <= 12; $i++) {
+        $selected = "";
+        if ($i == $time) $selected = "selected";
+        print "<option value=$i $selected>$i</option>";
+    }
+    print "</select>";
+    print "月 ";
+}
+
+function displaySelectOfDay($str, $time) {
+    print "<select name=$str>";
+    for ($i = 1; $i <= 31; $i++) {
+        $selected = "";
+        if ($i == $time) $selected = "selected";
+        print "<option value=$i $selected>$i</option>";
+    }
+    print "</select>";
+    print "日 ";
+}
+
+function displaySelectOfHour($str, $time) {
+    print "<select name=$str>";
+    for ($i = 0; $i <= 23; $i++) {
+        $selected = "";
+        if ($i == $time) $selected = "selected";
+        print "<option value=$i $selected>$i</option>";
+    }
+    print "</select>";
+    print "時 ";
+}
+
+function displaySelectOfMinute($str, $time) {
+    print "<select name=$str>";
+    for ($i = 0; $i <= 59; $i++) {
+        $selected = "";
+        if ($i == $time) $selected = "selected";
+        print "<option value=$i $selected>$i</option>";
+    }
+    print "</select>";
+    print "分 ";
+}
+
+function createTimeStringOfAbstAndPaper($str) {
+    $yearStr = $str. '_year';
+    $monthStr = $str. '_month';
+    $dayStr = $str. '_day';
+    $hourStr = $str. '_hour';
+    $minuteStr = $str. '_minute';
+    $str = $_POST[$yearStr]. ','.
+        $_POST[$monthStr]. ','.
+        $_POST[$dayStr]. ','.
+        $_POST[$hourStr]. ','.
+        $_POST[$minuteStr];
+
+    return $str;
+}
+
+function createTimeStringOfPresen($str, $startOrEnd) {
+    $yearStr = $str. '_year';
+    $monthStr = $str. '_month';
+    $dayStr = $str. '_day';
+    $hourStr = $str. '_'. $startOrEnd. '_hour';
+    $minuteStr = $str. '_'. $startOrEnd. '_minute';
+    $str = $_POST[$yearStr]. ','.
+        $_POST[$monthStr]. ','.
+        $_POST[$dayStr]. ','.
+        $_POST[$hourStr]. ','.
+        $_POST[$minuteStr];
+
+    return $str;
+}
+?>
