@@ -159,8 +159,8 @@ $jsonSotsuPresenEnd = json_encode($timeSotsuPresenEnd);
 (　ﾟ∀ﾟ)　　バレ！<br>
 ⊂彡<br>
 </div>
-</tr>
 </td>
+</tr>
 </table>
 </div>
 
