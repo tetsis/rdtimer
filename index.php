@@ -47,66 +47,98 @@ $jsonSotsuPresenEnd = json_encode($timeSotsuPresenEnd);
 
 <h1>研究締め切りタイマー</h1>
 <br/>
-<div id="table">
-    <table>
-    <tr>
-        <td>
-        </td>
-        <td>
-            <h2>修論</h2>
-        </td>
-        <td>
-            <h2>卒論</h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <h2>アブスト</h2>
-        </td>
-        <td>
-            <div id="shu_abst" class="research_deadline_timer"></div>
-            <h3 id="shu_abst_date"></h3>
-        </td>
-        <td>
-            <div id="sotsu_abst" class="research_deadline_timer"></div>
-            <h3 id="sotsu_abst_date"></h3>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <h2>論文</h2>
-        </td>
-        <td>
-            <div id="shu_paper" class="research_deadline_timer"></div>
-            <h3 id="shu_paper_date"></h3>
-        </td>
-        <td>
-            <div id="sotsu_paper" class="research_deadline_timer"></div>
-            <h3 id="sotsu_paper_date"></h3>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <h2>発表</h2>
-        </td>
-        <td>
-            <div id="shu_presen" class="research_deadline_timer"></div>
-            <h3 id="shu_presen_date"></h3>
-        </td>
-        <td>
-            <div id="sotsu_presen" class="research_deadline_timer"></div>
-            <h3 id="sotsu_presen_date"></h3>
-        </td>
-    </tr>
-    </table>
-</div>
+<table id="main">
+<tr>
+    <td>
+    </td>
+    <td>
+        <h2>修論</h2>
+    </td>
+    <td>
+        <h2>卒論</h2>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h2>アブスト</h2>
+    </td>
+    <td>
+        <div id="shu_abst" class="research_deadline_timer"></div>
+        <h3 id="shu_abst_date"></h3>
+    </td>
+    <td>
+        <div id="sotsu_abst" class="research_deadline_timer"></div>
+        <h3 id="sotsu_abst_date"></h3>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h2>論文</h2>
+    </td>
+    <td>
+        <div id="shu_paper" class="research_deadline_timer"></div>
+        <h3 id="shu_paper_date"></h3>
+    </td>
+    <td>
+        <div id="sotsu_paper" class="research_deadline_timer"></div>
+        <h3 id="sotsu_paper_date"></h3>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h2>発表</h2>
+    </td>
+    <td>
+        <div id="shu_presen" class="research_deadline_timer"></div>
+        <h3 id="shu_presen_date"></h3>
+    </td>
+    <td>
+        <div id="sotsu_presen" class="research_deadline_timer"></div>
+        <h3 id="sotsu_presen_date"></h3>
+    </td>
+</tr>
+</table>
 <div id="owata">
 ｵﾜﾀ ＼(^o^)／
 </div>
 <br/>
-<br/>
-<br/>
 <div id="now"></div>
+<table id="ganbare">
+<tr>
+<td>
+<div id="ganbare1" class="aa">
+　　♪　ﾁｬｯﾁｬｯﾁｬｯ　♪<br>
+　　　　　　　∧＿∧<br>
+　　　　　　 （･∀･　）<br>
+　　　((( ;;"~;;;"~゛;;）<br>
+　　　　. ﾐ;,,_,ﾐ;,,_,,;ﾐ<br>
+</div>
+<div id="ganbare2" class="aa">
+　　　　♪　ﾁｬｯﾁｬｯﾁｬｯ　♪<br>
+　 　　　　 ∧＿∧<br>
+　　　　　 （　･∀･）<br>
+　　　　　（;;"~゛;;;~゛;; )))<br>
+　　　　　. ﾐ;,,_,,;ﾐ,_,,;ﾐ<br>
+</div>
+<div id="ganbare3" class="aa">
+　　　♪　　うーっ　　♪<br>
+　 　　　　 ∧＿∧<br>
+　　　　　 （. ･∀･ ）<br>
+　　　　　 ;;"~゛;;;"~゛;; <br>
+　　　　　 ﾐ;,,_,,;ﾐ,,,_,,;ﾐ<br>
+</div>
+<div id="ganbare4" class="aa">
+　 ♪　　ガンバレ　　♪<br>
+　 ;;"~'ﾞ;; .∧＿∧ ;;"~'ﾞ;;<br>
+　 ﾐ,,,_,,,ﾐ（ ・∀・ ）ﾐ,,,_,,,ﾐ<br>
+　　　　 ＼　　　 ／<br>
+　　　　 　|⌒I、│<br>
+　　　　　（＿） ノ<br>
+　　　　　 　　∪
+</div>
+</td>
+</tr>
+</table>
 <br/>
 </body>
 </html>

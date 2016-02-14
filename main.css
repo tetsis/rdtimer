@@ -4,11 +4,6 @@ body {
     font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
 }
 
-table {
-    margin: 0 auto;
-    border-collapse:collapse;
-}
-
 h1 {
     text-align: center;
 }
@@ -20,18 +15,23 @@ h2 {
 }
 
 h3 {
-    margin: 10px 0px;
+    margin: 6px 0px;
     font-size: 18px;
     text-align: right;
 }
 
-td {
+table {
+    margin: 0 auto;
+    border-collapse:collapse;
+}
+
+#main td {
     border-bottom: solid;
 }
 
 .research_deadline_timer {
     text-align: center;
-    margin: 30px 20px;
+    margin: 20px 20px;
     font-size: 32px;
     width: 480px;
 }
@@ -44,4 +44,10 @@ td {
 
 #now {
     text-align: center;
+}
+
+.aa {
+    font-family: 'ＭＳ Ｐゴシック','ＭＳＰゴシック','MSPゴシック','MS Pゴシック';
+    font-size: 16px;
+    line-height: 18px;
 }

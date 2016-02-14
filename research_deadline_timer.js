@@ -14,6 +14,8 @@ var counterSotsuAbst = 0;
 var counterSotsuPaper = 0;
 var counterSotsuPresen = 0;
 
+var counterGanbare = 0;
+
 //ロード関数
 window.addEventListener('load',
     function (event) {
@@ -79,6 +81,9 @@ function display() {
 
     //現在時刻表示
     displayCurrentTime();
+
+    //がんばれ表示
+    displayGanbare();
 }
 
 //アブスト欄と論文欄を表示する関数
@@ -257,4 +262,33 @@ function createTimeString(time) {
     timeStr = year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':00.000';
 
     return timeStr;
+}
+
+//がんばれを表示する関数
+function displayGanbare() {
+    var ganbare1 = document.getElementById('ganbare1');
+    var ganbare2 = document.getElementById('ganbare2');
+    var ganbare3 = document.getElementById('ganbare3');
+    var ganbare4 = document.getElementById('ganbare4');
+    ganbare1.style.display = 'none';
+    ganbare2.style.display = 'none';
+    ganbare3.style.display = 'none';
+    ganbare4.style.display = 'none';
+    if (counterGanbare <= 8) {
+        ganbare1.style.display = 'block';
+    }
+    else if (counterGanbare <= 16) {
+        ganbare2.style.display = 'block';
+    }
+    else if (counterGanbare <= 24) {
+        ganbare3.style.display = 'block';
+    }
+    else if (counterGanbare <= 34) {
+        ganbare4.style.display = 'block';
+        if (counterGanbare == 34){
+            counterGanbare = 0;
+        }
+    }
+
+    counterGanbare++;
 }
