@@ -117,6 +117,8 @@ $jsonSotsuPresenEnd = json_encode($timeSotsuPresenEnd);
 　　　　　 （･∀･　）<br>
 　　((( ;;"~;;;"~゛;;）<br>
 　　　. ﾐ;,,_,ﾐ;,,_,,;ﾐ<br>
+<br>
+<br>
 </div>
 <div id="ganbare2" class="aa">
 　　　♪　ﾁｬｯﾁｬｯﾁｬｯ　♪<br>
@@ -124,6 +126,8 @@ $jsonSotsuPresenEnd = json_encode($timeSotsuPresenEnd);
 　　　　 （　･∀･）<br>
 　　　　（;;"~゛;;;~゛;; )))<br>
 　　　　. ﾐ;,,_,,;ﾐ,_,,;ﾐ<br>
+<br>
+<br>
 </div>
 <div id="ganbare3" class="aa">
 　　♪　　うーっ　　♪<br>
@@ -131,6 +135,8 @@ $jsonSotsuPresenEnd = json_encode($timeSotsuPresenEnd);
 　　　　 （. ･∀･ ）<br>
 　　　　 ;;"~゛;;;"~゛;; <br>
 　　　　 ﾐ;,,_,,;ﾐ,,,_,,;ﾐ<br>
+<br>
+<br>
 </div>
 <div id="ganbare4" class="aa">
  ♪　　ガンバレ　　♪<br>
@@ -139,7 +145,7 @@ $jsonSotsuPresenEnd = json_encode($timeSotsuPresenEnd);
 　　　 ＼　　　 ／<br>
 　　　 　|⌒I、│<br>
 　　　　（＿） ノ<br>
-　　　　 　　∪
+　　　　 　　∪<br>
 </div>
 </td>
 </tr>
@@ -153,6 +159,7 @@ $jsonSotsuPresenEnd = json_encode($timeSotsuPresenEnd);
 <div id="oppai1" class="aa">
 　　　　∩<br>
 (　ﾟ∀ﾟ)彡　ガン　<br>
+<br>
 </div>
 <div id="oppai2" class="aa">
 <br>

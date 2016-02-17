@@ -44,17 +44,11 @@ window.addEventListener('load',
 //タイマー表示のメイン関数
 function display() {
     //タイマー表示
-    //shu_abst
     counterShuAbst = displayTimeOfAbstAndPaper(timeShuAbstStr, 'shu_abst', counterShuAbst);
-    //shu_paper
     counterShuPaper = displayTimeOfAbstAndPaper(timeShuPaperStr, 'shu_paper', counterShuPaper);
-    //shu_presen
     counterShuPresen = displayTimeOfPresen(timeShuPresenStartStr, timeShuPresenEndStr, 'shu_presen', counterShuPresen);
-    //sotsu_abst
     counterSotsuAbst = displayTimeOfAbstAndPaper(timeSotsuAbstStr, 'sotsu_abst', counterSotsuAbst);
-    //sotsu_paper
     counterSotsuPaper = displayTimeOfAbstAndPaper(timeSotsuPaperStr, 'sotsu_paper', counterSotsuPaper);
-    //sotsu_presen
     counterSotsuPresen = displayTimeOfPresen(timeSotsuPresenStartStr, timeSotsuPresenEndStr, 'sotsu_presen', counterSotsuPresen);
 
     //締切表示
@@ -334,15 +328,19 @@ function displayGanbare(flag) {
         ganbare4.style.display = 'none';
         if (counterGanbare <= 8) {
             ganbare1.style.display = 'block';
+            ganbare1.style.color = 'white';
         }
         else if (counterGanbare <= 16) {
             ganbare2.style.display = 'block';
+            ganbare2.style.color = 'white';
         }
         else if (counterGanbare <= 24) {
             ganbare3.style.display = 'block';
+            ganbare3.style.color = 'white';
         }
         else if (counterGanbare <= 34) {
             ganbare4.style.display = 'block';
+            ganbare4.style.color = 'white';
             if (counterGanbare == 34){
                 counterGanbare = 0;
             }
@@ -366,9 +364,11 @@ function displayOppai(flag) {
         oppai2.style.display = 'none';
         if (counterOppai <= 4) {
             oppai1.style.display = 'block';
+            oppai1.style.color = 'white';
         }
         else if (counterOppai <= 8) {
             oppai2.style.display = 'block';
+            oppai2.style.color = 'white';
             if (counterOppai == 8){
                 counterOppai = 0;
             }
