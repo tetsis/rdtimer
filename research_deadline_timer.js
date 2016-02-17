@@ -305,7 +305,7 @@ function createTimeString(time) {
     day = ('0' + time[2]).slice(-2);
     hour = ('0' + time[3]).slice(-2);
     minute = ('0' + time[4]).slice(-2);
-    timeStr = year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':00.000';
+    timeStr = year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':00.000+09:00';
 
     return timeStr;
 }
