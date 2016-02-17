@@ -2,8 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8">
-    <!--<meta http-equiv="refresh" content="43200">-->
-    <meta http-equiv="refresh" content="5000;URL=index.php">
+    <meta http-equiv="refresh" content="43200">
     <title>研究締め切りタイマー</title>
     <script type="text/javascript" src="research_deadline_timer.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
