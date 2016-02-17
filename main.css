@@ -29,21 +29,14 @@ table {
     border-bottom: solid;
 }
 
-.research_deadline_timer {
+#now {
     text-align: center;
-    margin: 20px 20px;
-    font-size: 32px;
-    width: 480px;
 }
 
 #owata {
     text-align: center;
     font-size: 150px;
     display: none;
-}
-
-#now {
-    text-align: center;
 }
 
 #update {
@@ -62,6 +55,13 @@ table {
 #link a:hover, #link a:active {
     color: black;
     background-color: white;
+}
+
+.research_deadline_timer {
+    text-align: center;
+    margin: 20px 20px;
+    font-size: 32px;
+    width: 480px;
 }
 
 .aa {

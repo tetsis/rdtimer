@@ -9,7 +9,7 @@
 <body>
 
 <div id="link">
-<a href = "../index.php">元の画面へ</a>
+<a href = "../">元の画面へ</a>
 </div>
 <h1>研究締め切りタイマー　管理者画面</h1>
 
@@ -17,8 +17,8 @@
 
 <?php
 
+//「更新」ボタンを押した時の処理
 if ($_POST['update']) {
-
     $shuAbstStr = createTimeStringOfAbstAndPaper('shu_abst');
     $shuPaperStr = createTimeStringOfAbstAndPaper('shu_paper');
     $shuPresenStartStr = createTimeStringOfPresen('shu_presen', 'start');
@@ -27,6 +27,8 @@ if ($_POST['update']) {
     $sotsuPaperStr = createTimeStringOfAbstAndPaper('sotsu_paper');
     $sotsuPresenStartStr = createTimeStringOfPresen('sotsu_presen', 'start');
     $sotsuPresenEndStr = createTimeStringOfPresen('sotsu_presen', 'end');
+
+    //データファイルの書き込み
     $fp = fopen("deadline.dat", "w");
     if ($fp) {
         fputs($fp, $shuAbstStr. "\n");
@@ -45,6 +47,7 @@ if ($_POST['update']) {
     }
 }
 
+//データファイルの読み込み
 $fp = fopen("deadline.dat", "r");
 if ($fp) {
     $timeShuAbst = fgetcsv($fp);
@@ -143,6 +146,7 @@ else {
 
 
 <?php
+//アブストと論文の設定画面を表示する関数
 function displaySettingOfAbstAndPaper($time, $str) {
     $yearStr = $str. '_year';
     $monthStr = $str. '_month';
@@ -158,6 +162,7 @@ function displaySettingOfAbstAndPaper($time, $str) {
     displaySelectOfMinute($minuteStr, $time[4]);
 }
 
+//発表の設定画面を表示する関数
 function displaySettingOfPresen($startTime, $endTime, $str) {
     $yearStr = $str. '_year';
     $monthStr = $str. '_month';
@@ -179,6 +184,7 @@ function displaySettingOfPresen($startTime, $endTime, $str) {
     displaySelectOfMinute($endMinuteStr, $endTime[4]);
 }
 
+//年を選択する画面を表示する関数
 function displaySelectOfYear($str, $time) {
     print "<select name=$str>";
     for ($i = 2015; $i <= 2030; $i++) {
@@ -190,6 +196,7 @@ function displaySelectOfYear($str, $time) {
     print "年 ";
 }
 
+//月を選択する画面を表示する関数
 function displaySelectOfMonth($str, $time) {
     print "<select name=$str>";
     for ($i = 1; $i <= 12; $i++) {
@@ -201,6 +208,7 @@ function displaySelectOfMonth($str, $time) {
     print "月 ";
 }
 
+//日を選択する画面を表示する関数
 function displaySelectOfDay($str, $time) {
     print "<select name=$str>";
     for ($i = 1; $i <= 31; $i++) {
@@ -212,6 +220,7 @@ function displaySelectOfDay($str, $time) {
     print "日 ";
 }
 
+//時間を選択する画面を表示する関数
 function displaySelectOfHour($str, $time) {
     print "<select name=$str>";
     for ($i = 0; $i <= 23; $i++) {
@@ -223,6 +232,7 @@ function displaySelectOfHour($str, $time) {
     print "時 ";
 }
 
+//分を選択する画面を表示する関数
 function displaySelectOfMinute($str, $time) {
     print "<select name=$str>";
     for ($i = 0; $i <= 59; $i++) {
@@ -234,6 +244,7 @@ function displaySelectOfMinute($str, $time) {
     print "分 ";
 }
 
+//アブストと論文のデータファイルに書き込む文字列を作成する関数
 function createTimeStringOfAbstAndPaper($str) {
     $yearStr = $str. '_year';
     $monthStr = $str. '_month';
@@ -249,6 +260,7 @@ function createTimeStringOfAbstAndPaper($str) {
     return $str;
 }
 
+//発表のデータファイルに書き込む文字列を作成する関数
 function createTimeStringOfPresen($str, $startOrEnd) {
     $yearStr = $str. '_year';
     $monthStr = $str. '_month';

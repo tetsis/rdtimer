@@ -59,7 +59,7 @@ function display() {
     displayDateOfAbstAndPaper(timeSotsuPaper, 'sotsu_paper_date');
     displayDateOfPresen(timeSotsuPresenStart, timeSotsuPresenEnd, 'sotsu_presen_date');
 
-    //がんばれとがんばれ（おっぱいver）表示の初期化
+    //がんばれAAとがんばれAA（おっぱいver）表示の初期化
     displayGanbare(false);
     displayOppai(false);
 
@@ -76,7 +76,7 @@ function display() {
         document.getElementById('owata').style.display = 'block';
     }
     else {
-        //1日未満のタイマーがあればがんばれ（おっぱいver）表示
+        //1日未満のタイマーがあればがんばれAA（おっぱいver）表示
         var flagOppai = 0;
         flagOppai += isOppai(timeShuAbstStr);
         flagOppai += isOppai(timeShuPaperStr);
@@ -88,7 +88,7 @@ function display() {
             displayOppai(true);
         }
         else {
-            //あと3日～1日のタイマーがあればがんばれ表示
+            //あと3日～1日のタイマーがあればがんばれAA表示
             var flagGanbare = 0;
             flagGanbare += isGanbare(timeShuAbstStr);
             flagGanbare += isGanbare(timeShuPaperStr);
@@ -104,7 +104,6 @@ function display() {
 
     //現在時刻表示
     displayCurrentTime();
-
 }
 
 //アブスト欄と論文欄を表示する関数
@@ -268,7 +267,7 @@ function isTimerOver(timeStr) {
     return 0;
 }
 
-//がんばれの表示を判断する関数（返り値 0：がんばれじゃない、1：がんばれ）
+//がんばれAAの表示を判断する関数（返り値 0：がんばれじゃない、1：がんばれ）
 //残り時間が3日～1日の間にあれば1を返す
 function isGanbare(timeStr) {
     var now = new Date();
@@ -283,7 +282,7 @@ function isGanbare(timeStr) {
     return 0;
 }
 
-//がんばれ（おっぱいver）の表示を判断する関数（返り値 0：がんばれじゃない、1：がんばれ）
+//がんばれAA（おっぱいver）の表示を判断する関数（返り値 0：がんばれじゃない、1：がんばれ）
 //残り時間が1日未満になれば1を返す
 function isOppai(timeStr) {
     var now = new Date();
@@ -310,7 +309,7 @@ function createTimeString(time) {
     return timeStr;
 }
 
-//がんばれを表示する関数
+//がんばれAAを表示する関数
 function displayGanbare(flag) {
     var ganbare = document.getElementById('ganbare');
     if (flag == false) {
@@ -350,7 +349,7 @@ function displayGanbare(flag) {
     }
 }
 
-//がんばれ（おっぱいver）を表示する関数
+//がんばれAA（おっぱいver）を表示する関数
 function displayOppai(flag) {
     var oppai = document.getElementById('oppai');
     if (flag == false) {

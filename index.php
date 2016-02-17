@@ -11,6 +11,7 @@
 <body>
 
 <?php
+//データファイルの読み込み
 $fp = fopen("admin/deadline.dat", "r");
 if ($fp) {
     $timeShuAbst = fgetcsv($fp);
@@ -24,6 +25,7 @@ if ($fp) {
 }
 fclose($fp);
 
+//javascriptに渡すための変換
 $jsonShuAbst = json_encode($timeShuAbst);
 $jsonShuPaper = json_encode($timeShuPaper);
 $jsonShuPresenStart = json_encode($timeShuPresenStart);
@@ -45,7 +47,7 @@ $jsonSotsuPresenEnd = json_encode($timeSotsuPresenEnd);
     var timeSotsuPresenEnd = <?php echo $jsonSotsuPresenEnd; ?>;
 </script>
 <div id="link">
-<a href = "admin/index.php">管理者画面へ</a>
+<a href = "admin/">管理者画面へ</a>
 </div>
 <h1>研究締め切りタイマー</h1>
 <br/>
