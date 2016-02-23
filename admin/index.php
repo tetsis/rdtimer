@@ -42,7 +42,7 @@ if ($_POST['update']) {
         fclose($fp);
     }
     else {
-        echo "ファイルの書き込みに失敗しました。";
+        echo "ファイルの書き込みに失敗しました。deadline.datファイルの権限を確認してください。";
         exit(1);
     }
 }

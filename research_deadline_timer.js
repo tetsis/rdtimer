@@ -30,11 +30,11 @@ window.addEventListener('load',
         timeShuAbstStr = createTimeString(timeShuAbst);
         timeShuPaperStr = createTimeString(timeShuPaper);
         timeShuPresenStartStr = createTimeString(timeShuPresenStart);
-        timeShuPresenStartStr = createTimeString(timeShuPresenEnd);
+        timeShuPresenEndStr = createTimeString(timeShuPresenEnd);
         timeSotsuAbstStr = createTimeString(timeSotsuAbst);
         timeSotsuPaperStr = createTimeString(timeSotsuPaper);
         timeSotsuPresenStartStr = createTimeString(timeSotsuPresenStart);
-        timeSotsuPresenStartStr = createTimeString(timeSotsuPresenEnd);
+        timeSotsuPresenEndStr = createTimeString(timeSotsuPresenEnd);
 
         //一定時間ごとに画面表示を実行
         setInterval(display, 100);
@@ -72,7 +72,7 @@ function display() {
     flagTimeOver += isTimerOver(timeSotsuPaperStr);
     flagTimeOver += isTimerOver(timeSotsuPresenEndStr);
     if (flagTimeOver == 6) {
-        document.getElementById('table').style.display = 'none';
+        document.getElementById('main').style.display = 'none';
         document.getElementById('owata').style.display = 'block';
     }
     else {
@@ -193,7 +193,7 @@ function displayCurrentTime() {
 //残り時間を表示する関数（返り値 カウンターの値）
 function displayTime(lap, element, counter) {
     var day = Math.floor(lap/DAY_MILLISECOND);
-    var strDay = ('0' + day).slice(-2);
+    var strDay = ('0' + day).slice(-3);
     lap -= day * DAY_MILLISECOND;
     var hour = Math.floor(lap/HOUR_MILLISECOND);
     var strHour = ('0' + hour).slice(-2);
